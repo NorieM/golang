@@ -1,8 +1,12 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
+import "os"
+
+func writeBalanceToFile(balance float64) {
+	balanceText:=fmt.Sprint(balance)
+	os.WriteFile("balance.txt", []byte(balanceText), 0644)
+}
 
 func main() {
 
@@ -14,7 +18,7 @@ func main() {
 
 	for {
 
-		fmt.Print("Please choose from the options below:")
+		fmt.Println("\nPlease choose from the options below:")
 
 		for index, choice := range choices {
 			fmt.Println(fmt.Sprintf("%v", index+1) + ". " + choice)
@@ -35,7 +39,8 @@ func main() {
 				continue
 			}
 			accountBalance += depositAmount
-			fmt.Println("Deposit made. You're new balance is", accountBalance)
+			writeBalanceToFile(accountBalance)
+			fmt.Println("\nDeposit made. You're new balance is", accountBalance)
 		case 3:
 			var withdrawalAmount float64
 			fmt.Print("Please enter the amount you wish to withdraw:")
@@ -49,7 +54,8 @@ func main() {
 				continue
 			}
 
-			accountBalance += withdrawalAmount
+			accountBalance -= withdrawalAmount
+			writeBalanceToFile(accountBalance)
 			fmt.Println("Withdrawal made. You're new balance is", accountBalance)
 		default:
 			fmt.Println("Goodbye!")
