@@ -13,19 +13,20 @@ func main() {
 	fmt.Println("How can I help you today?")
 
 	for {
+
+		fmt.Print("Please choose from the options below:")
+
 		for index, choice := range choices {
 			fmt.Println(fmt.Sprintf("%v", index+1) + ". " + choice)
 		}
 
 		var choice int
-
-		fmt.Print("Please choose from the above options:")
-
 		fmt.Scan(&choice)
 
-		if choice == 1 {
+		switch choice {
+		case 1:
 			fmt.Println("You're balance is", accountBalance)
-		} else if choice == 2 {
+		case 2:
 			var depositAmount float64
 			fmt.Print("Please enter the amount you wish to deposit:")
 			fmt.Scan(&depositAmount)
@@ -35,7 +36,7 @@ func main() {
 			}
 			accountBalance += depositAmount
 			fmt.Println("Deposit made. You're new balance is", accountBalance)
-		} else if choice == 3 {
+		case 3:
 			var withdrawalAmount float64
 			fmt.Print("Please enter the amount you wish to withdraw:")
 			fmt.Scan(&withdrawalAmount)
@@ -50,10 +51,12 @@ func main() {
 
 			accountBalance += withdrawalAmount
 			fmt.Println("Withdrawal made. You're new balance is", accountBalance)
-		} else {
+		default:
 			fmt.Println("Goodbye!")
-			break
+			fmt.Println("Thanks for choosing to work with us today!")
+			return
 		}
+
 	}
-	fmt.Println("Thanks for choosing to work with us today!")
+
 }
