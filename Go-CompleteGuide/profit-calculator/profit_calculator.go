@@ -33,7 +33,7 @@ func main() {
 	prettyPrint(profit, "%.1f\n")
 	prettyPrint(ratio, "%.3f\n")
 
-	writeFinancialsToFile(ebt, profit, ratio)
+	storeFinancials(ebt, profit, ratio)
 }
 
 func getUserInput(prompt string) (float64, error) {
@@ -55,7 +55,7 @@ func calculateFinancials(revenue, expenses, taxRate float64) (float64, float64, 
 	return ebt, profit, ratio
 }
 
-func writeFinancialsToFile (ebt, profit, ratio float64) {
+func storeFinancials(ebt, profit, ratio float64) {
 
 	f, err := os.Create(financialsFile)
 
@@ -63,9 +63,7 @@ func writeFinancialsToFile (ebt, profit, ratio float64) {
 		fmt.Println("There has been an error")
 	}
 
-	fmt.Fprintf(f, "Earnings before tax: %v\n", ebt)
-	fmt.Fprintf(f, "Profit: %v\n", ebt)
-	fmt.Fprintf(f, "Ratio: %v\n", ebt)
+	fmt.Fprintf(f, "Earnings before tax: %.1f\nProfit: %.1f\nRatio: %.1f\n", ebt, profit, ratio)
 
 }
 
