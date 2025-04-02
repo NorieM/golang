@@ -43,17 +43,15 @@ func main() {
 		panic("Cannot continue with Bank App!")
 	}
 
-	var choices = [4]string{"Check balance", "Deposit money", "Withdraw money", "Exit"}
 	fmt.Println("Welcome to the Bank of Job!")
 	fmt.Println("How can I help you today?")
-
+	
+	
 	for {
-
+		
 		fmt.Println("\nPlease choose from the options below:")
-
-		for index, choice := range choices {
-			fmt.Println(fmt.Sprintf("%v", index+1) + ". " + choice)
-		}
+		
+		showOptions()	
 
 		var choice int
 		fmt.Scan(&choice)
@@ -97,3 +95,4 @@ func main() {
 	}
 
 }
+
