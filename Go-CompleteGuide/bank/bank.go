@@ -1,8 +1,11 @@
 package main
 
-import "fmt"
-import "os"
-import "strconv"
+import (
+	"errors"
+	"fmt"
+	"os"
+	"strconv"
+)
 
 const accountBalanceFile = "balance.txt"
 
@@ -11,17 +14,34 @@ func writeBalanceToFile(balance float64) {
 	os.WriteFile(accountBalanceFile, []byte(balanceText), 0644)
 }
 
-func getBalanceFromFile() float64  {
-	data, _ :=os.ReadFile(accountBalanceFile)
+func getBalanceFromFile() (float64, error)  {
+	data, err :=os.ReadFile(accountBalanceFile)
+
+	if err != nil {
+		return 1000, errors.New("Failed to find balance file!")
+	}
+
 	balanceText := string(data)
-	balance, _:=strconv.ParseFloat(balanceText, 64)
-	return balance
+	balance, err:=strconv.ParseFloat(balanceText, 64)
+
+	if err != nil {
+		return 1000, errors.New("Failed to parse stored balance value!")
+	}
+
+	return balance, nil
 }
 
 
 func main() {
 
-	var accountBalance = getBalanceFromFile()
+	var accountBalance, err = getBalanceFromFile()
+
+	if err != nil {
+		fmt.Println("ERROR!")
+		fmt.Println(err.Error())
+		fmt.Println("----")
+		panic("Cannot continue with Bank App!")
+	}
 
 	var choices = [4]string{"Check balance", "Deposit money", "Withdraw money", "Exit"}
 	fmt.Println("Welcome to the Bank of Job!")
