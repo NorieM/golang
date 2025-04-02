@@ -63,7 +63,7 @@ func storeFinancials(ebt, profit, ratio float64) {
 		fmt.Println("There has been an error")
 	}
 
-	fmt.Fprintf(f, "Earnings before tax: %.1f\nProfit: %.1f\nRatio: %.1f\n", ebt, profit, ratio)
+	fmt.Fprintf(f, "Earnings before tax: %.1f\nProfit: %.1f\nRatio: %.3f\n", ebt, profit, ratio)
 
 }
 
