@@ -3,7 +3,10 @@ package main
 import (
 	"errors"
 	"fmt"
+	"os"
 )
+
+const financialsFile = "financials.txt"
 
 func main() {
 
@@ -24,11 +27,13 @@ func main() {
 		panic("Invalid value entered for tax rate!")
 	}
 
-	ebt, profit, ratio := calculateReturn(revenue, expenses, taxRate)
+	ebt, profit, ratio := calculateFinancials(revenue, expenses, taxRate)
 
 	prettyPrint(ebt, "%.1f\n")
 	prettyPrint(profit, "%.1f\n")
 	prettyPrint(ratio, "%.3f\n")
+
+	writeFinancialsToFile(ebt, profit, ratio)
 }
 
 func getUserInput(prompt string) (float64, error) {
@@ -43,11 +48,25 @@ func getUserInput(prompt string) (float64, error) {
 	return inputValue, nil
 }
 
-func calculateReturn(revenue, expenses, taxRate float64) (float64, float64, float64) {
+func calculateFinancials(revenue, expenses, taxRate float64) (float64, float64, float64) {
 	ebt := revenue - expenses
 	profit := ebt * (1 - taxRate/100)
 	ratio := ebt / profit
 	return ebt, profit, ratio
+}
+
+func writeFinancialsToFile (ebt, profit, ratio float64) {
+
+	f, err := os.Create(financialsFile)
+
+	if err != nil {
+		fmt.Println("There has been an error")
+	}
+
+	fmt.Fprintf(f, "Earnings before tax: %v\n", ebt)
+	fmt.Fprintf(f, "Profit: %v\n", ebt)
+	fmt.Fprintf(f, "Ratio: %v\n", ebt)
+
 }
 
 func prettyPrint(value float64, format string) {
