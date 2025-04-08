@@ -17,7 +17,17 @@ func main() {
 	if err !=nil {
 		fmt.Println(err.Error())
 		return
-	}
+	} 
+
+	admin := user.NewAdmin("test@example.com", "password")
+
+	admin.OutputUserDetails()
+
+	admin.ClearUserName()
+
+	admin.OutputUserDetails()
+
+	
 
 	// ... do something awesome with that gathered data!
 
