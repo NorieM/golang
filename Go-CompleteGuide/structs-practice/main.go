@@ -1,7 +1,11 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"os"
+	"strings"
+
 	"example.com/note/note"
 )
 
@@ -22,14 +26,23 @@ func getNoteData() (string, string) {
 	title := getUserInput("Note Title:")	
 	content:= getUserInput("Note Content:")
 
-	return content, title
+	return title, content
 }
 
 
 func getUserInput(prompt string) string {
-	fmt.Println(prompt)
-	var value string
-	fmt.Scanln(&value)
+	fmt.Printf("%v ", prompt)
 
-	return value
+	reader := bufio.NewReader(os.Stdin)
+
+	text, err := reader.ReadString('\n')
+
+	if err != nil {
+		return ""
+	}
+
+	text = strings.TrimSuffix(text, "\n")
+	text = strings.TrimSuffix(text, "\r")
+
+	return text
 }
