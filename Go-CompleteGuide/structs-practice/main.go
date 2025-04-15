@@ -12,9 +12,9 @@ import (
 func main() {
 	title, content := getNoteData()
 
-	userNote, err:=note.New(title, content)
+	userNote, err := note.New(title, content)
 
-	if err !=nil {
+	if err != nil {
 		fmt.Println(err)
 		return
 	}
@@ -23,12 +23,11 @@ func main() {
 }
 
 func getNoteData() (string, string) {
-	title := getUserInput("Note Title:")	
-	content:= getUserInput("Note Content:")
+	title := getUserInput("Note Title:")
+	content := getUserInput("Note Content:")
 
 	return title, content
 }
-
 
 func getUserInput(prompt string) string {
 	fmt.Printf("%v ", prompt)
