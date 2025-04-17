@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"example.com/note/note"
+	"example.com/note/todo"
 )
 
 func main() {
@@ -23,7 +24,7 @@ func main() {
 
 	err = userNote.Save()
 
-	if err !=nil{
+	if err != nil {
 		fmt.Println("Saving note failed.")
 	}
 }
