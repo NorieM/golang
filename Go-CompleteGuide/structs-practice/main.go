@@ -21,9 +21,18 @@ type outputtable interface {
 
 func main() {
 
+	title, content := getNoteData()
 	todoText := getUserInput("Todo text: ")
 
 	todo, err := todo.New(todoText)
+
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	
+	userNote, err := note.New(title, content)
 
 	if err != nil {
 		fmt.Println(err)
@@ -36,20 +45,8 @@ func main() {
 		return
 	}
 
-	title, content := getNoteData()
+	outputData(userNote)
 
-	userNote, err := note.New(title, content)
-
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-
-	err = outputData(userNote)
-
-	if err != nil {
-		return
-	}
 }
 
 func outputData(data outputtable) error {
