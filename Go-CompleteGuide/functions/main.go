@@ -5,7 +5,7 @@ import "fmt"
 func main() {
 	numbers := []int{1, 2, 3}
 
-	transformed := transformNumbers(&numbers, func( n int ) int {return n *2})
+	transformed := transformNumbers(&numbers, createTransformer(4))
 
 	fmt.Println(transformed)
 }
@@ -18,4 +18,11 @@ func transformNumbers(numbers *[]int, transform func(int) int) []int {
 	}
 
 	return dNumbers
+}
+
+func createTransformer(factor int) func(int) int {
+	return func (number int) int {
+		return number * factor
+	}
+
 }
