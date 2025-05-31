@@ -3,26 +3,28 @@ package main
 import "fmt"
 
 func main() {
-	numbers := []int{1, 2, 3}
+	answer := factorial(5)
 
-	transformed := transformNumbers(&numbers, createTransformer(4))
+	fmt.Println(answer)
 
-	fmt.Println(transformed)
 }
 
-func transformNumbers(numbers *[]int, transform func(int) int) []int {
-	dNumbers := []int{}
+func factorial(number int) int {
 
-	for _, val := range *numbers {
-		dNumbers = append(dNumbers, transform(val))
+	if number == 0 {
+		return 1
 	}
 
-	return dNumbers
-}
+	return number * factorial(number-1)
 
-func createTransformer(factor int) func(int) int {
-	return func (number int) int {
-		return number * factor
-	}
+	// result := 1
 
+	// for i := 1; i <= number; i++ {
+	// 	result = result * i
+	// }
+
+	// return result
+
+	
+	
 }
