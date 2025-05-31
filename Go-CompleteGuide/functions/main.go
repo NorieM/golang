@@ -3,28 +3,18 @@ package main
 import "fmt"
 
 func main() {
-	answer := factorial(5)
+	// numbers := []int{1, 2, 3, 4, 5}
 
-	fmt.Println(answer)
+	result := sumup(20, 1,10, 15)
 
+	fmt.Println(result)
 }
 
-func factorial(number int) int {
+func sumup(startingValue int, numbers ...int) int {
+	sum := startingValue
 
-	if number == 0 {
-		return 1
+	for _, val := range numbers {
+		sum += val
 	}
-
-	return number * factorial(number-1)
-
-	// result := 1
-
-	// for i := 1; i <= number; i++ {
-	// 	result = result * i
-	// }
-
-	// return result
-
-	
-	
+	return sum
 }
