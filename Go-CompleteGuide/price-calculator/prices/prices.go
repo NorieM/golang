@@ -22,12 +22,12 @@ func (job *TaxIncludedPriceJob) LoadData() {
 		return
 	}
 
-	scanner := bufio.NewScanner(file)
+	scanner:= bufio.NewScanner(file)
 
 	var lines []string
 
 	for scanner.Scan() {
-		lines = append(lines, scanner.Text())
+		lines =	append(lines, scanner.Text())
 	}
 
 	err = scanner.Err()
@@ -44,7 +44,7 @@ func (job *TaxIncludedPriceJob) LoadData() {
 	for lineIndex, line := range lines {
 		floatPrice, err := strconv.ParseFloat(line, 64)
 
-		if err != nil {
+		if err!=nil {
 			fmt.Println("Error converting price to float!")
 			fmt.Println(err)
 			file.Close()
@@ -68,6 +68,7 @@ func (job *TaxIncludedPriceJob) Process() {
 		result[fmt.Sprintf("%.2f", price)] = price * (1 + job.TaxRate)
 	}
 
+	fmt.Printf("Tax Rate: %.2f%%\n", job.TaxRate*100)
 	fmt.Println(result)
 
 }
