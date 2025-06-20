@@ -41,18 +41,7 @@ func (job *TaxIncludedPriceJob) LoadData() {
 
 	prices := make([]float64, len(lines))
 
-	for lineIndex, line := range lines {
-		floatPrice, err := strconv.ParseFloat(line, 64)
 
-		if err!=nil {
-			fmt.Println("Error converting price to float!")
-			fmt.Println(err)
-			file.Close()
-			return
-		}
-
-		prices[lineIndex] = floatPrice
-	}
 
 	job.InputPrices = prices
 
