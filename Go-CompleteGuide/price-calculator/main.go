@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+
 	"example.com/price-calculator/prices"
 )
 
@@ -12,5 +14,5 @@ func main() {
 		priceJob := prices.NewTaxIncludedPriceJob(taxRate)
 		priceJob.Process()
 	}
-
+	fmt.Println("Prices sent to file!")
 }
