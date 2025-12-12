@@ -10,3 +10,11 @@ type Event struct {
 	DateTime    time.Time
 	UserID int	
 }
+
+var events = []Event{}
+
+func (e Event) Save() {
+	// TODO: add event to database
+	events = append(events, e)
+}
+
