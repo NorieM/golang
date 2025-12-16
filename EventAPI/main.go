@@ -20,7 +20,12 @@ func main() {
 }
 
 func getEvents(context *gin.Context) {
-	events := models.GetAllEvents()
+	events, err := models.GetAllEvents()
+
+	if err !=nil {
+		context.JSON(http.StatusInternalServerError, gin.H{"message": "Unable to retrieve events! Try later!"})
+		return
+	}
 	context.JSON(http.StatusOK, events)
 }
 
