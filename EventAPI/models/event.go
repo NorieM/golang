@@ -23,7 +23,7 @@ func (e Event) Save() error {
 		name,
 		description,
 		location,
-		dateTime.
+		dateTime,
 		user_id
 		) VALUES (?,?,?,?,? )
 	`
